@@ -1,23 +1,13 @@
-#
-#  Be sure to run `pod spec lint ASIHTTPRequest.podspec' to ensure this is a
-#  valid spec and to remove all comments including this before submitting the spec.
-#
-#  To learn more about Podspec attributes see http://docs.cocoapods.org/specification.html
-#  To see working Podspecs in the CocoaPods repo see https://github.com/CocoaPods/Specs/
-#
 
 Pod::Spec.new do |s|
-
-  # ―――  Spec Metadata  ―――――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
-  #
-  #  These will help people to find your library, and whilst it
-  #  can feel like a chore to fill in it's definitely to your advantage. The
-  #  summary should be tweet-length, and the description more in depth.
-  #
 
   s.name         = "ASIHTTPRequest"
   s.version      = "0.0.1"
   s.summary      = "one old version ASIHTTPRequest for my app."
+  s.homepage     = "http://wenxp/ASIHTTPRequest"
+  s.author             = { "wenxp" => "wenxp2006@qq.com" }
+   s.license      = 'WenXP License'
+  s.source       = { :git => "https://github.com/wenxp/ASIHTTPRequest.git", :tag => "0.0.1" }
 
   s.description  = <<-DESC
                    A longer description of ASIHTTPRequest in Markdown format.
@@ -28,109 +18,33 @@ Pod::Spec.new do |s|
                    * Finally, don't worry about the indent, CocoaPods strips it!
                    DESC
 
-  s.homepage     = "http://wenxp/ASIHTTPRequest"
-  # s.screenshots  = "www.example.com/screenshots_1", "www.example.com/screenshots_2"
 
+ s.subspec 'Core' do |core|
+    core.source_files = 'Classes/*.{h,m}'
+    core.ios.dependency 'Reachability' #, '~> 2.0', '>= 2.0.4'
+    core.ios.frameworks   = 'MobileCoreServices', 'CFNetwork', 'CoreGraphics'
 
-  # ―――  Spec License  ――――――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
-  #
-  #  Licensing your code is important. See http://choosealicense.com for more info.
-  #  CocoaPods will detect a license file if there is a named LICENSE*
-  #  Popular ones are 'MIT', 'BSD' and 'Apache License, Version 2.0'.
-  #
+    core.osx.exclude_files = '**/*ASIAuthenticationDialog*'
+    core.osx.frameworks   = 'SystemConfiguration', 'CoreServices'
 
-  s.license      = 'WenXP License'
-  # s.license      = { :type => 'MIT', :file => 'FILE_LICENSE' }
+    core.libraries = 'z.1'
+  end
 
+  s.subspec 'ASIWebPageRequest' do |ws|
+    ws.source_files = 'Classes/ASIWebPageRequest/*.{h,m}'
+    ws.libraries      = 'xml2.2'
+    ws.xcconfig     = { 'HEADER_SEARCH_PATHS' => '"$(SDKROOT)/usr/include/libxml2"' }
+    ws.dependency 'ASIHTTPRequest/Core'
+  end
 
-  # ――― Author Metadata  ――――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
-  #
-  #  Specify the authors of the library, with email addresses. Email addresses
-  #  of the authors by using the SCM log. E.g. $ git log. If no email can be
-  #  found CocoaPods accept just the names.
-  #
+  s.subspec 'CloudFiles' do |cfs|
+    cfs.source_files = 'Classes/CloudFiles/*.{h,m}','Classes/S3/ASINSXMLParserCompat.h'
+    cfs.dependency 'ASIHTTPRequest/Core'
+  end
 
-  s.author             = { "wenxp" => "wenxp2006@qq.com" }
-  # s.authors          = { "wenxp" => "wenxp2006@qq.com", "other author" => "email@address.com" }
-  # s.author           = 'wenxp', 'other author'
-  # s.social_media_url = "http://twitter.com/wenxp"
-
-  # ――― Platform Specifics ――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
-  #
-  #  If this Pod runs only on iOS or OS X, then specify the platform and
-  #  the deployment target. You can optionally include the target after the platform.
-  #
-
-  # s.platform     = :ios
-  # s.platform     = :ios, '5.0'
-
-  #  When using multiple platforms
-  # s.ios.deployment_target = '5.0'
-  # s.osx.deployment_target = '10.7'
-
-
-  # ――― Source Location ―――――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
-  #
-  #  Specify the location from where the source should be retrieved.
-  #  Supports git, hg, bzr, svn and HTTP.
-  #
-
-  s.source       = { :git => "https://github.com/wenxp/ASIHTTPRequest.git", :tag => "0.0.1" }
-
-
-  # ――― Source Code ―――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
-  #
-  #  CocoaPods is smart about how it includes source code. For source files
-  #  giving a folder will include any h, m, mm, c & cpp files. For header
-  #  files it will include any header in the folder.
-  #  Not including the public_header_files will make all headers public.
-  #
-
-  s.source_files  = 'Classes', 'Classes/**/*.{h,m}'
-  s.exclude_files = '**/*ASIAuthenticationDialog*'
-  s.ios.dependency 'Reachability' #, '~> 2.0', '>= 2.0.4'
-  s.ios.frameworks   = 'MobileCoreServices', 'CFNetwork', 'CoreGraphics'
-  s.osx.frameworks   = 'SystemConfiguration', 'CoreServices'
-
-  # s.public_header_files = 'Classes/**/*.h'
-
-
-  # ――― Resources ―――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
-  #
-  #  A list of resources included with the Pod. These are copied into the
-  #  target bundle with a build phase script. Anything else will be cleaned.
-  #  You can preserve files from being cleaned, please don't preserve
-  #  non-essential files like tests, examples and documentation.
-  #
-
-  # s.resource  = "icon.png"
-  # s.resources = "Resources/*.png"
-
-  # s.preserve_paths = "FilesToSave", "MoreFilesToSave"
-
-
-  # ――― Project Linking ―――――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
-  #
-  #  Link your library with frameworks, or libraries. Libraries do not include
-  #  the lib prefix of their name.
-  #
-
-  # s.framework  = 'SomeFramework'
-  # s.frameworks = 'SomeFramework', 'AnotherFramework'
-
-  # s.library   = 'iconv'
-  # s.libraries = 'iconv', 'xml2'
-
-
-  # ――― Project Settings ――――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
-  #
-  #  If your library depends on compiler flags you can set them in the xcconfig hash
-  #  where they will only apply to your library. If you depend on other Podspecs
-  #  you can include multiple dependencies to ensure it works.
-
-  # s.requires_arc = true
-
-  # s.xcconfig = { 'HEADER_SEARCH_PATHS' => '$(SDKROOT)/usr/include/libxml2' }
-  # s.dependency 'JSONKit', '~> 1.4'
+  s.subspec 'S3' do |s3s|
+    s3s.source_files = 'Classes/S3/*.{h,m}'
+    s3s.dependency 'ASIHTTPRequest/Core'
+  end
 
 end
