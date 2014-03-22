@@ -17,7 +17,7 @@ Pod::Spec.new do |s|
 
   s.name         = "ASIHTTPRequest"
   s.version      = "0.0.1"
-  s.summary      = "A short description of ASIHTTPRequest."
+  s.summary      = "one old version ASIHTTPRequest for my app."
 
   s.description  = <<-DESC
                    A longer description of ASIHTTPRequest in Markdown format.
@@ -28,7 +28,7 @@ Pod::Spec.new do |s|
                    * Finally, don't worry about the indent, CocoaPods strips it!
                    DESC
 
-  s.homepage     = "http://EXAMPLE/ASIHTTPRequest"
+  s.homepage     = "http://wenxp/ASIHTTPRequest"
   # s.screenshots  = "www.example.com/screenshots_1", "www.example.com/screenshots_2"
 
 
@@ -39,7 +39,7 @@ Pod::Spec.new do |s|
   #  Popular ones are 'MIT', 'BSD' and 'Apache License, Version 2.0'.
   #
 
-  s.license      = 'MIT (example)'
+  s.license      = 'WenXP License'
   # s.license      = { :type => 'MIT', :file => 'FILE_LICENSE' }
 
 
@@ -75,7 +75,7 @@ Pod::Spec.new do |s|
   #  Supports git, hg, bzr, svn and HTTP.
   #
 
-  s.source       = { :git => "http://EXAMPLE/ASIHTTPRequest.git", :tag => "0.0.1" }
+  s.source       = { :git => "https://github.com/wenxp/ASIHTTPRequest.git", :tag => "0.0.1" }
 
 
   # ――― Source Code ―――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
@@ -87,7 +87,10 @@ Pod::Spec.new do |s|
   #
 
   s.source_files  = 'Classes', 'Classes/**/*.{h,m}'
-  s.exclude_files = 'Classes/Exclude'
+  s.exclude_files = '**/*ASIAuthenticationDialog*'
+  s.ios.dependency 'Reachability' #, '~> 2.0', '>= 2.0.4'
+  s.ios.frameworks   = 'MobileCoreServices', 'CFNetwork', 'CoreGraphics'
+  s.osx.frameworks   = 'SystemConfiguration', 'CoreServices'
 
   # s.public_header_files = 'Classes/**/*.h'
 
