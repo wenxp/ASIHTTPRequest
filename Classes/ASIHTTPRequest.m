@@ -1128,8 +1128,8 @@ static NSOperationQueue *sharedQueue = nil;
 		return;
 	}
 	
-	[self performSelectorOnMainThread:@selector(requestStarted) withObject:nil waitUntilDone:[NSThread isMainThread]];
-	
+//Aladdin	[self performSelectorOnMainThread:@selector(requestStarted) withObject:nil waitUntilDone:[NSThread isMainThread]];
+        [self performSelectorInBackground:@selector(requestStarted) withObject:nil];	
 	[self setDownloadComplete:NO];
 	[self setComplete:NO];
 	[self setTotalBytesRead:0];
@@ -1993,7 +1993,8 @@ static NSOperationQueue *sharedQueue = nil;
 	if ([self isPACFileRequest]) {
 		[self reportFinished];
 	} else {
-		[self performSelectorOnMainThread:@selector(reportFinished) withObject:nil waitUntilDone:[NSThread isMainThread]];
+//Aladdin		[self performSelectorOnMainThread:@selector(reportFinished) withObject:nil waitUntilDone:[NSThread isMainThread]];
+        [self performSelectorInBackground:@selector(reportFinished) withObject:nil];
 	}
 }
 
