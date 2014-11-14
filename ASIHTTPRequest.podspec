@@ -35,16 +35,19 @@ Pod::Spec.new do |s|
     ws.libraries      = 'xml2.2'
     ws.xcconfig     = { 'HEADER_SEARCH_PATHS' => '"$(SDKROOT)/usr/include/libxml2"' }
     ws.dependency 'ASIHTTPRequest/Core'
+    ws.requires_arc = false
   end
 
   s.subspec 'CloudFiles' do |cfs|
     cfs.source_files = 'Classes/CloudFiles/*.{h,m}','Classes/S3/ASINSXMLParserCompat.h'
     cfs.dependency 'ASIHTTPRequest/Core'
+    cfs.requires_arc = false
   end
 
   s.subspec 'S3' do |s3s|
     s3s.source_files = 'Classes/S3/*.{h,m}'
     s3s.dependency 'ASIHTTPRequest/Core'
+    s3s.requires_arc = false
   end
 
 end
