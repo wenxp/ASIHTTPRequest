@@ -18,7 +18,7 @@ Pod::Spec.new do |s|
                    * Finally, don't worry about the indent, CocoaPods strips it!
                    DESC
 
-
+ s.requires_arc = false
  s.subspec 'Core' do |core|
     core.source_files = 'Classes/*.{h,m}'
     core.ios.dependency 'Reachability' #, '~> 2.0', '>= 2.0.4'
